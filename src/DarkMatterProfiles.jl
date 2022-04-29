@@ -1,5 +1,11 @@
 module DarkMatterProfiles
 
-# Write your package code here.
+export DMProfile, dmdensity, dmdensity_galactic
+export EinastoProfile
 
-end
+abstract type DMProfile end
+
+include("Interfaces.jl")
+include("Profiles.jl")
+
+end # module
