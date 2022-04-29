@@ -4,4 +4,4 @@ authors = ["Chen Xia"]
 version = "0.0.1"
 
 [compat]
-julia = "1.2"
+julia = "1.6"
