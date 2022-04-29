@@ -1,0 +1,7 @@
+name = "DarkMatterProfiles"
+uuid = "48b3a478-c9fa-42f4-b737-e59b1d0562ca"
+authors = ["Chen Xia"]
+version = "0.0.1"
+
+[compat]
+julia = "1.2"
