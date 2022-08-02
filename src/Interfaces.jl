@@ -11,11 +11,13 @@ dmdensity(8.5, dmp)
 ```
 """
 dmdensity(r::Number, p::DMProfile) = error("dmdensity not implemented")
-dmdensity(x::Number, y::Number, z::Number, p::DMProfile) = error("3D-dmdensity not implemented")
+function dmdensity(x::Number, y::Number, z::Number, p::DMProfile)
+    return dmdensity(hypot(x, y, z), p)
+end
 
 "DMProfile as functor"
 (p::DMProfile)(r::Number) = dmdensity(r, p)
-(p::DMProfile)(x::Number, y::Number, z::Number) = dmdensity(x, y, z)
+(p::DMProfile)(x::Number, y::Number, z::Number) = dmdensity(x, y, z, p)
 
 """
     dmdensity_galactic(r::Number, b::Number, l::Number, p::DMProfile; rsun::Number=8.5)
