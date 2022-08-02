@@ -8,17 +8,17 @@ Einasto Profile
 ```
 
 # Fields
-- `rho0::Real`: ``\rho_\chi^\text{loc}``
-- `rsun::Real`: ``R_\odot``
-- `rs::Real`: ``R_\text{s}``
-- `alpha::Real`: ``\alpha``
+- `rho0::Number`: ``\rho_\chi^\text{loc}``
+- `rsun::Number`: ``R_\odot``
+- `rs::Number`: ``R_\text{s}``
+- `alpha::Number`: ``\alpha``
 """
 mutable struct EinastoProfile <: DMProfile
-    rho0::Real
-    rsun::Real
-    rs::Real
-    alpha::Real
+    rho0::Number
+    rsun::Number
+    rs::Number
+    alpha::Number
 end
-function dmdensity(r::Real, p::EinastoProfile)
+function dmdensity(r::Number, p::EinastoProfile)
     return p.rho0 * exp((-2 / p.alpha) * ((r/p.rs)^p.alpha - (p.rsun/p.rs)^p.alpha))
 end
