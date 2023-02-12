@@ -19,6 +19,6 @@ mutable struct EinastoProfile <: DMProfile
     rs::Number
     alpha::Number
 end
-function dmdensity(r::Number, p::EinastoProfile)
+function dmdensity(p::EinastoProfile, r::Number)
     return p.rho0 * exp((-2 / p.alpha) * ((r/p.rs)^p.alpha - (p.rsun/p.rs)^p.alpha))
 end
