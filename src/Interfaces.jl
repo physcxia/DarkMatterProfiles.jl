@@ -6,7 +6,7 @@ Return dark matter density of the profile `p` in Galactocentric coordinates.
 
 # Example
 ```
-dmp = EinastoProfile(0.3, 8.5, 20.0, 0.17)
+dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
 dmdensity(dmp, 8.5)
 ```
 """
