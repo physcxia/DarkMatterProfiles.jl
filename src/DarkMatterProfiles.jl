@@ -7,11 +7,10 @@ import Base.==
 
 abstract type DMProfile end
 
-function ==(a::T, b::T) where T <: DMProfile
+function ==(a::T, b::U) where {T <: DMProfile, U <: DMProfile}
     f = fieldnames(T)
-    getfield.(Ref(a),f) == getfield.(Ref(b),f)
+    return getfield.(Ref(a),f) == getfield.(Ref(b),f)
 end
-
 
 include("Interfaces.jl")
 include("DMProfiles.jl")

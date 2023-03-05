@@ -10,7 +10,7 @@ dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
 dmdensity(dmp, 8.5)
 ```
 """
-dmdensity(p::DMProfile, r::Number) = error("dmdensity not implemented")
+dmdensity(p::DMProfile, r::Number) = error("dmdensity is not implemented")
 function dmdensity(p::DMProfile, x::Number, y::Number, z::Number)
     return dmdensity(p, hypot(x, y, z))
 end

@@ -3,9 +3,16 @@ using Unitful
 using UnitfulAstro
 using DarkMatterProfiles
 
+@testset "DMProfile" begin
+    struct DMPTest <: DarkMatterProfiles.DMProfile test end
+    dmp = DMPTest(0)
+    @test_throws ErrorException dmdensity(dmp, 0)
+end
+
 @testset "DMPEinasto" begin
     dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
     @test dmp == DMPEinasto()
+    @test dmp == DMPEinasto(0.3, 8.5, 20, 0.17)
     @test dmdensity(dmp, 8.5) == 0.3
     @test dmdensity(dmp, 8.5, 0, 0) == 0.3
     @test dmp(8.5) == 0.3
