@@ -5,9 +5,12 @@
 Return dark matter density of the profile `p` in Galactocentric coordinates.
 
 # Example
-```
-dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
-dmdensity(dmp, 8.5)
+```jldoctest
+julia> dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
+DMPEinasto{Float64, Float64, Float64}(0.3, 8.5, 20.0, 0.17)
+
+julia> dmdensity(dmp, 8.5)
+0.3
 ```
 """
 dmdensity(p::DMProfile, r::Number) = error("dmdensity is not implemented")
@@ -15,7 +18,21 @@ function dmdensity(p::DMProfile, x::Number, y::Number, z::Number)
     return dmdensity(p, hypot(x, y, z))
 end
 
-"DMProfile as functor"
+"""
+    (p::DMProfile)(r::Number)
+    (p::DMProfile)(x::Number, y::Number, z::Number)
+
+DMProfiles as functors.
+
+# Example
+```jldoctest
+julia> dmp = DMPEinasto()
+DMPEinasto{Float64, Float64, Float64}(0.3, 8.5, 20.0, 0.17)
+
+julia> dmp(8.5)
+0.3
+```
+"""
 (p::DMProfile)(r::Number) = dmdensity(p, r)
 (p::DMProfile)(x::Number, y::Number, z::Number) = dmdensity(p, x, y, z)
 

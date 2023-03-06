@@ -2,30 +2,29 @@
 Einasto Profile
 
 ```math
-    \rho^\mathrm{EIN}_\chi(r)
+    ρ^\text{EIN}_χ(r)
 =
-    \rho_\chi^\text{loc}
+    ρ_χ^\text{loc}
     \exp\left[
-        -\frac{2}{\alpha}\left(\frac{r^\alpha-R_{\odot}^\alpha} {R_\text{s}^\alpha}\right)
+        -\frac{2}{α}\left(\frac{r^α-R_{⊙}^α} {R_\text{s}^α}\right)
     \right]
 ```
 
 # Fields
-- `rho0::T`: ``\rho_\chi^\text{loc}``
-- `rsun::U`: ``R_\odot``
-- `rs::U`: ``R_\text{s}``
-- `alpha::V`: ``\alpha``
+- `rho0::T<:Number`: ``ρ_χ^\text{loc}``
+- `rsun::U<:Number`: ``R_⊙``
+- `rs::U<:Number`: ``R_\text{s}``
+- `alpha::V<:Number`: ``α``
 """
-mutable struct DMPEinasto{T <: Number, U <: Number, V <: Number} <: DMProfile
-    rho0::T
-    rsun::U
-    rs::U
-    alpha::V
+Base.@kwdef mutable struct DMPEinasto{T <: Number, U <: Number, V <: Number} <: DMProfile
+    rho0::T = 0.3
+    rsun::U = 8.5
+    rs::U = 20.0
+    alpha::V = 0.17
 end
 function DMPEinasto(rho0::Number, rsun::Number, rs::Number, alpha::Number)
     return DMPEinasto(rho0, promote(rsun, rs)..., alpha)
 end
-DMPEinasto() = DMPEinasto(0.3, 8.5, 20.0, 0.17)
 
 function dmdensity(p::DMPEinasto, r::Number)
     return p.rho0 * exp((-2 / p.alpha) * ((r/p.rs)^p.alpha - (p.rsun/p.rs)^p.alpha))

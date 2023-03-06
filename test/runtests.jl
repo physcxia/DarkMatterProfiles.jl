@@ -13,6 +13,7 @@ end
     dmp = DMPEinasto(0.3, 8.5, 20.0, 0.17)
     @test dmp == DMPEinasto()
     @test dmp == DMPEinasto(0.3, 8.5, 20, 0.17)
+    @test dmp == DMPEinasto(rsun=8.5, rs=20, rho0=0.3, alpha=0.17)
     @test dmdensity(dmp, 8.5) == 0.3
     @test dmdensity(dmp, 8.5, 0, 0) == 0.3
     @test dmp(8.5) == 0.3
