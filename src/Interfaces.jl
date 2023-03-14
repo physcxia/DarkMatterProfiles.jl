@@ -1,6 +1,6 @@
 """
-    dmdensity(p::DMProfile, r::Number)
-    dmdensity(p::DMProfile, x::Number, y::Number, z::Number)
+    dmdensity(p::DMProfile, r)
+    dmdensity(p::DMProfile, x, y, z)
 
 Return dark matter density of the profile `p` in Galactocentric coordinates.
 
@@ -13,14 +13,14 @@ julia> dmdensity(dmp, 8.5)
 0.3
 ```
 """
-dmdensity(p::DMProfile, r::Number) = error("dmdensity is not implemented")
-function dmdensity(p::DMProfile, x::Number, y::Number, z::Number)
+dmdensity(p::DMProfile, r) = error("dmdensity is not implemented")
+function dmdensity(p::DMProfile, x, y, z)
     return dmdensity(p, hypot(x, y, z))
 end
 
 """
-    (p::DMProfile)(r::Number)
-    (p::DMProfile)(x::Number, y::Number, z::Number)
+    (p::DMProfile)(r)
+    (p::DMProfile)(x, y, z)
 
 DMProfiles as functors.
 
@@ -33,23 +33,23 @@ julia> dmp(8.5)
 0.3
 ```
 """
-(p::DMProfile)(r::Number) = dmdensity(p, r)
-(p::DMProfile)(x::Number, y::Number, z::Number) = dmdensity(p, x, y, z)
+(p::DMProfile)(r) = dmdensity(p, r)
+(p::DMProfile)(x, y, z) = dmdensity(p, x, y, z)
 
 """
-    dmdensity_galactic(p::DMProfile, r::Number, b::Number, l::Number; rsun::Number=8.5)
+    dmdensity_galactic(p::DMProfile, r, b, l; rsun=8.5)
 
 Return dark matter density of the profile `p` in Galactic coordinates.
 
 # Arguments
 - `p::DMProfile`: The dark matter profile.
-- `r::Number`: The distance along the line-of-sight.
-- `b::Number`: The Galactic latitude.
-- `l::Number`: The Galactic longitude.
+- `r`: The distance along the line-of-sight.
+- `b`: The Galactic latitude.
+- `l`: The Galactic longitude.
 
 # Keywords
-- `rsun::Number`: The distance from the Sun to the Galactic Center.
+- `rsun`: The distance from the Sun to the Galactic Center.
 """
-function dmdensity_galactic(p::DMProfile, r::Number, b::Number, l::Number; rsun::Number=8.5)
-    return dmdensity(p, sqrt(r*r + rsun*rsun - 2*r*rsun * cos(b) * cos(l)))
+function dmdensity_galactic(p::DMProfile, r, b, l; rsun=8.5)
+    return dmdensity(p, sqrt(r^2 + rsun^2 - 2 * r * rsun * cos(b) * cos(l)))
 end
