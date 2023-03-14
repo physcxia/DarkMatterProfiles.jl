@@ -4,7 +4,7 @@ CurrentModule = DarkMatterProfiles
 
 # DarkMatterProfiles
 
-Documentation for [DarkMatterProfiles](https://github.com/physcxia/DarkMatterProfiles.jl).
+Documentation for [DarkMatterProfiles.jl](https://github.com/physcxia/DarkMatterProfiles.jl).
 
 ## Interfaces
 
@@ -18,7 +18,7 @@ Pages = ["Interfaces.jl"]
 ```@autodocs
 Modules = [DarkMatterProfiles]
 Order = [:type]
-Pages = ["Profiles.jl"]
+Pages = ["DMProfiles.jl"]
 ```
 
 ## Index

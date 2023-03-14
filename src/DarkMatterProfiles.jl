@@ -2,7 +2,7 @@ module DarkMatterProfiles
 
 export dmdensity, dmdensity_galactic
 export DMProfile
-export DMPEinasto
+export DMPEinasto, DMPNFW
 
 import Base.==
 
