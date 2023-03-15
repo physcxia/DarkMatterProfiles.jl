@@ -51,5 +51,5 @@ Return dark matter density of the profile `p` in Galactic coordinates.
 - `rsun`: The distance from the Sun to the Galactic Center.
 """
 function dmdensity_galactic(p::DMProfile, r, b, l; rsun=8.5)
-    return dmdensity(p, sqrt(r^2 + rsun^2 - 2 * r * rsun * cos(b) * cos(l)))
+    return dmdensity(p, sqrt((r - rsun)^2 + 2 * r * rsun * (1 - cos(b) * cos(l))))
 end
