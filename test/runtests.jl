@@ -13,8 +13,8 @@ function test_local_density(dmp, rsun, ρloc)
 end
 
 @testset "DMProfile" begin
-    struct DMPTest <: DarkMatterProfiles.DMProfile test end
-    dmp = DMPTest(0)
+    struct DMPTestError <: DMProfile test end
+    dmp = DMPTestError(0)
     @test_throws ErrorException dmdensity(dmp, 0)
 end
 
@@ -25,6 +25,7 @@ end
     @test dmp == DMPEinasto(rsun=8.5, rs=20, rho0=0.3, alpha=0.17)
     test_local_density(dmp, 8.5, 0.30)
     @test dmdensity_galactic(dmp, 0, 0, 0) == 0.3  # test the default rsun
+    @test dmdensity.(dmp, [1, 2, 3]) == [dmdensity(dmp, r) for r in [1, 2, 3]]
 
     @testset "DMPEinasto with Unitful" begin
         ρloc = 0.3u"GeV/cm^3"
