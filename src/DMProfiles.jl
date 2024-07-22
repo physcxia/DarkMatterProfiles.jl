@@ -72,3 +72,32 @@ function dmdensity(p::DMPNFW, r)
     return (p.rho0 * (1 + p.rsun / p.rs)^(3 - p.gamma)
             * (r / p.rsun)^(-p.gamma) * (1 + r / p.rs)^(p.gamma - 3))
 end
+
+
+@doc raw"""
+Isothermal Profile
+
+```math
+    ρ^\text{ISO}_χ(r)
+=
+    ρ_χ^\text{loc}
+    \frac{R_⊙^2 + R_\text{c}^2}{r^2 + R_\text{c}^2}
+```
+
+# Fields
+- `rho0::T<:Number=0.3`: ``ρ_χ^\text{loc}``
+- `rsun::U<:Number=8.5`: ``R_⊙``
+- `rc::U<:Number=2.8`: ``R_\text{c}``
+"""
+Base.@kwdef mutable struct DMPIsothermal{T <: Number, U <: Number} <: DMProfile
+    rho0::T = 0.3
+    rsun::U = 8.5
+    rc::U = 2.8
+end
+function DMPIsothermal(rho0, rsun, rs, rcut=zero(rs), gamma=1)
+    return DMPIsothermal(rho0, promote(rsun, rs, rcut)..., gamma)
+end
+
+function dmdensity(p::DMPIsothermal, r)
+    return p.rho0 * (p.rsun^2 + p.rc^2) / (r^2 + p.rc^2)
+end
